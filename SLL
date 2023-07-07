@@ -1,0 +1,135 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class SLL:
+    def create_list(start):
+        if start is not None:
+            print('List is already there with first element as ', start.data)
+            return start
+
+        num = int(input('Enter data: '))
+        newnode = Node(num)
+        start = newnode
+        return start
+
+    def insert_beg(start):
+        num = int(input('Enter data: '))
+        newnode = Node(num)
+        if start is None:
+            print('List empty. This will be first element')
+            start = newnode
+            return start
+
+        newnode.next = start
+        start = newnode
+        return start
+
+    def insert_end(start):
+        num = int(input('Enter data: '))
+        newnode = Node(num)
+        ptr = start
+        while ptr.next is not None:
+            ptr = ptr.next
+
+        ptr.next = newnode
+        return start
+
+    def display(start):
+        ptr = start
+        while ptr.next is not None:
+            print(ptr.data,'->', end = '')
+            ptr = ptr.next
+        print(ptr.data,'->None')
+        return start
+
+    def insert_mid(start):
+        num = int(input('Enter data: '))
+        newnode = Node(num)
+        pos = int(input('Enter after which element: '))
+        ptr = start
+        while ptr.data != pos:
+            ptr = ptr.next
+            if ptr == None:
+                print('No such element as ', pos)
+                return start
+
+        newnode.next = ptr.next
+        ptr.next = newnode
+        return start
+
+    def delete_beg(start):
+        if start is None:
+            print('List is empty, nothing to delete')
+            return start
+
+        ptr = start
+        start = start.next
+        del ptr
+        return start
+
+
+    def delete_end(start):
+        if start is None:
+            print('List is empty, nothing to delete')
+            return start
+
+        ptr = start
+        while ptr.next.next is not None:
+            ptr = ptr.next
+
+        ptr1 = ptr.next
+        ptr.next = None
+        del ptr1
+        return start
+
+
+    def delete_mid(start):
+        num = int(input('Enter element to delete: '))
+        if start is None:
+            print('List is empty, nothing to delete')
+            return start
+
+        if start.data == num:
+            ptr1 = start
+            start = start.next
+            del ptr1
+            return start
+
+        ptr = start
+        while ptr.next is not None:
+            if ptr.next.data == num:
+                ptr1 = ptr.next
+                ptr.next = ptr1.next
+                del ptr1
+                return start
+            ptr = ptr.next
+
+        print('No such element to delete')
+        return start
+
+
+    start = None
+    while True:
+        print('1. create list\n2. insert at beginning\n3. insert at end\n4. insert in middle\n5. delete beg\n6. delete end\n7. delete mid\n100. display')
+        option = int(input('Enter your option: '))
+        if option == 1:
+            start = create_list(start)
+        elif option == 2:
+            start = insert_beg(start)
+        elif option == 3:
+            start = insert_end(start)
+        elif option == 4:
+            start = insert_mid(start)
+        elif option == 5:
+            start = delete_beg(start)
+        elif option == 6:
+            start = delete_end(start)
+        elif option == 7:
+            start = delete_mid(start)
+        elif option == 100:
+            start = display(start)
+        else:
+            print('Invalid option. Thank you')
+            break
